@@ -6,9 +6,19 @@ window.addEventListener("load", function(){
 
 const createIssue = () => {
   const uri = "https://api.github.com/repos/kazuo278/hugo-sample/issues";
-  const pat = document.getElementById("pat");
-  const title = document.getElementById("title");
-  const body = document.getElementById("body");
+  let pat = document.getElementById("pat");
+  let title = document.getElementById("title");
+  let body = document.getElementById("body");
+
+  if(!pat) {
+    throw new Error("PATが未入力です");
+  }
+  if(!title) {
+    new Error("タイトルが未入力です");
+  }
+  if(!body) {
+    new Error("本文が未入力です");
+  }
 
   fetch(uri, {
     method: "POST",
@@ -21,6 +31,9 @@ const createIssue = () => {
   }).then(response => {
     console.log(response);
     if(response.ok){
+      pat.value = "";
+      title.value = "";
+      body.value = "";
       return response.json().then(resJson => {
         console.log(JSON.stringify(resJson));
       });
