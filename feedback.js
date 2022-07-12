@@ -14,10 +14,10 @@ const createIssue = () => {
     throw new Error("PATが未入力です");
   }
   if(!title) {
-    new Error("タイトルが未入力です");
+    throw new Error("タイトルが未入力です");
   }
   if(!body) {
-    new Error("本文が未入力です");
+    throw new Error("本文が未入力です");
   }
 
   fetch(uri, {
